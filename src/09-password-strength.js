@@ -27,4 +27,19 @@
  */
 export function checkPasswordStrength(password) {
   // Your code here
+  if (password === null || password === "" || typeof password !== "string")
+    return "weak";
+
+  let strengthLevel = 0;
+  // using regex will reduce lots of code lines and recommended in these scenarios, otherwise we are not good developer
+  if (password.length >= 8) strengthLevel++;
+  if (/[A-Z]/.test(password)) strengthLevel++;
+  if (/[a-z]/.test(password)) strengthLevel++;
+  if (/[0-9]/.test(password)) strengthLevel++;
+  if (/[!@#$%^&*()_={}|;:,.<>?]/.test(password)) strengthLevel++;
+
+  if (strengthLevel <= 1) return "weak";
+  else if (strengthLevel <= 3) return "medium";
+  else if (strengthLevel === 4) return "strong";
+  else return "very strong";
 }

@@ -34,4 +34,22 @@
  */
 export function calculateParkingFee(hours, vehicleType) {
   // Your code here
+  if (!["car", "motorcycle", "bus"].includes(vehicleType) || hours <= 0)
+    return -1;
+
+  if (vehicleType === "car") {
+    let roundedHours = Math.ceil(hours);
+    let carDailyFee = 5 + (roundedHours - 1) * 3;
+
+    return carDailyFee >= 30 ? 30 : carDailyFee;
+  } else if (vehicleType === "motorcycle") {
+    let roundedHours = Math.ceil(hours);
+    let motoDailyFee = 3 + (roundedHours - 1) * 2;
+    return motoDailyFee >= 18 ? 18 : motoDailyFee;
+  } else {
+    let roundedHours = Math.ceil(hours);
+    let busDailyFee = 10 + (roundedHours - 1) * 7;
+
+    return busDailyFee >= 60 ? 60 : busDailyFee;
+  }
 }
